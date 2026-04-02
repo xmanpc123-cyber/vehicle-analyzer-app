@@ -9,7 +9,10 @@ hide_streamlit_style = """
 <style>
 #MainMenu {visibility: hidden;}
 [data-testid="stHeaderActionElements"] {display: none;}
+[data-testid="ManageAppBadge"] {display: none;}
+[data-testid="viewerBadge"] {display: none;}
 footer {visibility: hidden;}
+header {background: transparent;}
 .block-container {
     padding-top: 2rem;
     padding-bottom: 5rem;

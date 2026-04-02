@@ -8,18 +8,8 @@ st.set_page_config(page_title="คัดรถนำ-รถตาม", page_icon
 hide_streamlit_style = """
 <style>
 #MainMenu {visibility: hidden;}
-[data-testid="stHeaderActionElements"],
-[data-testid="ManageAppBadge"],
-[data-testid="viewerBadge"],
-.viewerBadge_container__1QSob,
-.styles_viewerBadge__1yB5_,
-.viewerBadge_link__1S137,
-.viewerBadge_text__1JaDK,
-[class*="viewerBadge"] {
-    display: none !important;
-}
+[data-testid="stHeaderActionElements"] {display: none;}
 footer {visibility: hidden;}
-header {background: transparent;}
 .block-container {
     padding-top: 2rem;
     padding-bottom: 5rem;

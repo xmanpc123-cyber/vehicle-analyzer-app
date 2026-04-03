@@ -40,13 +40,13 @@ with st.sidebar:
     
     st.divider()
     st.header("⏱️ เงื่อนไขการวิเคราะห์")
-    time_window_minutes = st.slider("ช่วงเวลาที่ยอมรับได้ (นาทีก่อนและหลัง)", min_value=1, max_value=30, value=5, step=1)
-    min_co_occurrences = st.slider("จำนวนจุดตรวจขั้นต่ำที่พบร่วมกัน", min_value=1, max_value=10, value=1, step=1)
+    time_window_minutes = st.slider("เลือกช่วงเวลา ก่อน-หลัง (นาที)", min_value=1, max_value=30, value=5, step=1)
+    min_co_occurrences = st.slider("เลือกจำนวนจุดตรวจขั้นต่ำที่พบร่วมกัน", min_value=1, max_value=10, value=1, step=1)
     
     st.info("💡 **คำแนะนำ**: ยิ่งพบข้อมูลร่วมกันหลายจุดตรวจ โอกาสที่รถจะเดินทางมาด้วยกันยิ่งมีสูงขึ้น")
 
 # Main Page area
-st.header("📂 1. นำเข้าข้อมูลจุดตรวจ (CSV)")
+st.header("📂 นำเข้าข้อมูลจุดตรวจ (CSV)")
 st.markdown("กรุณาอัปโหลดไฟล์ CSV จากด่านตรวจต่างๆ (สามารถอัปโหลดทีละหลายไฟล์ได้)")
 
 uploaded_files = st.file_uploader("อัปโหลดไฟล์ CSV", type="csv", accept_multiple_files=True)
@@ -91,7 +91,7 @@ if uploaded_files:
             st.dataframe(merged_df.head(10))
             
         st.divider()
-        st.header("🔍 2. ผลการวิเคราะห์")
+        st.header("🔍 ผลการวิเคราะห์")
         
         if st.button("เริ่มวิเคราะห์ข้อมูล", type="primary"):
             if not target_plate or not target_province:
@@ -193,11 +193,11 @@ if uploaded_files:
                                 for k, v in companions.items():
                                     if v['จำนวนครั้งที่พบ'] >= min_co_occurrences:
                                         if v['จำนวนนำ'] == v['จำนวนครั้งที่พบ']:
-                                            v['พฤติกรรม'] = 'ผู้นำทาง (Leading)'
+                                            v['พฤติกรรม'] = 'ผู้นำทาง'
                                         elif v['จำนวนตาม'] == v['จำนวนครั้งที่พบ']:
-                                            v['พฤติกรรม'] = 'ผู้ตาม (Following)'
+                                            v['พฤติกรรม'] = 'ผู้ตาม'
                                         else:
-                                            v['พฤติกรรม'] = 'สลับกันนำ/ตาม (Mixed)'
+                                            v['พฤติกรรม'] = 'สลับกันนำ/ตาม'
                                         filtered_companions.append(v)
 
                                 if not filtered_companions:
@@ -212,8 +212,8 @@ if uploaded_files:
                                     columns_to_show = ['ทะเบียน', 'หมวดจังหวัด', 'พฤติกรรม', 'จำนวนนำ', 'จำนวนตาม', 'จำนวนครั้งที่พบ', 'รายละเอียดจุดตรวจ']
                                     
                                     # Split data
-                                    leaders_df = result_df[result_df['พฤติกรรม'] == 'ผู้นำทาง (Leading)']
-                                    followers_df = result_df[result_df['พฤติกรรม'] == 'ผู้ตาม (Following)']
+                                    leaders_df = result_df[result_df['พฤติกรรม'] == 'ผู้นำทาง']
+                                    followers_df = result_df[result_df['พฤติกรรม'] == 'ผู้ตาม']
                                     
                                     # Create Tabs
                                     tab1, tab2, tab3 = st.tabs([
